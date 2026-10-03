@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "checkedAt": "2026-10-03T05:29:51.072643+00:00",
-  "deployedCommit": "edf4f704a41dc1799c42c175ac13b2f7c674b865",
+  "checkedAt": "2026-10-03T06:02:44.048489+00:00",
+  "deployedCommit": "7c9473a4a1fc307ff67970c39e8b344714e8d12f",
   "checks": {
     "issuer": {
       "url": "https://prooftrail-issuer.vercel.app",
@@ -33,6 +33,7 @@
             "issuer": null,
             "protocol": "prooftrail/1",
             "maxBatchSize": 64,
+            "exampleAvailable": true,
             "disclaimer": "凭证证明发行者声明与字节完整性，不证明事实、版权或实际模型执行"
           }
         },
@@ -41,6 +42,11 @@
         },
         "/static/style.css": {
           "httpStatus": 200
+        },
+        "/api/example": {
+          "httpStatus": 200,
+          "originalBytesPreserved": true,
+          "containsVerdict": false
         },
         "serverSigningDisabled": {
           "httpStatus": 403
@@ -252,7 +258,8 @@
             "mode": "monad",
             "chainId": 10143,
             "contract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
-            "issuerApiRequired": false
+            "issuerApiRequired": false,
+            "exampleAvailable": true
           }
         },
         "/static/app.js": {
@@ -260,6 +267,11 @@
         },
         "/static/style.css": {
           "httpStatus": 200
+        },
+        "/api/example": {
+          "httpStatus": 200,
+          "originalBytesPreserved": true,
+          "containsVerdict": false
         }
       },
       "cases": {

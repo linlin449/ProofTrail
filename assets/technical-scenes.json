@@ -32,7 +32,7 @@
   {
     "title": "06 / 独立复现与交付边界",
     "visual": "reproduce",
-    "narration": "脱离两个服务，独立命令行进程也验证第一份有效、撤销份无效。两个非管理员只读容器连接真实测试网，没有签名私钥，服务端写接口被拒绝。中文文档保存原始交易和复现命令。公开托管、GitHub 与浏览器钱包实测仍待完成；尚无外部采用，来源声明不证明事实、版权或身份，比赛尚未提交。",
-    "english": "An independent CLI and two read-only, non-root containers reproduce the live-chain checks without signing keys. Hosting, public GitHub and browser-wallet testing remain pending. No external adoption is claimed. Provenance is not truth, copyright or identity; not submitted."
+    "narration": "独立命令行验证有效样例通过、撤销样例无效。两个只读容器连接真实测试网，无签名私钥。公开 GitHub 与两个 Vercel Python 应用已上线；无需钱包可载入公开链上样例，再读取最新状态。中文文档保存交易与复现命令。浏览器钱包实测和最终审阅仍待完成，尚无外部采用。来源声明不证明事实、版权或身份，比赛尚未提交。",
+    "english": "Independent CLI and read-only containers reproduce the checks without signing keys. Public GitHub and two Vercel Python apps are online. Verify a live-chain sample without a wallet. Wallet testing and final review remain pending. No external adoption is claimed; not submitted."
   }
 ]

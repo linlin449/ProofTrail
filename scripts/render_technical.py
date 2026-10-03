@@ -16,8 +16,10 @@ DEPLOYMENT = json.loads((ROOT / "artifacts/monad-deployment.json").read_text("ut
 ACCEPTANCE = json.loads((ROOT / "artifacts/monad-acceptance.json").read_text("utf-8"))
 SOURCE = json.loads((ROOT / "artifacts/verification/sourcify-record.json").read_text("utf-8"))
 CLI = json.loads((ROOT / "artifacts/monad-demo/independent-cli-checks.json").read_text("utf-8"))
+PUBLIC = json.loads((ROOT / "artifacts/public-hosting-probe.json").read_text("utf-8"))
 assert ACCEPTANCE["status"] == "passed"
 assert SOURCE["job"]["contract"]["match"] == "exact_match"
+assert PUBLIC["status"] == "passed"
 INK, MUTED, PAPER, MINT = "#193447", "#617789", "#EAF0F7", "#1A8277"
 
 
@@ -57,6 +59,7 @@ inputs = [
     "artifacts/monad-acceptance.json",
     "artifacts/verification/sourcify-record.json",
     "artifacts/monad-demo/independent-cli-checks.json",
+    "artifacts/public-hosting-probe.json",
 ]
 durations = []
 for index, scene in enumerate(SCENES, 1):
@@ -111,19 +114,19 @@ for index, scene in enumerate(SCENES, 1):
             draw, "单次样本；不含签名/树构建；RPC 耗时不是共识最终性。", (90, 743), 28, color=MUTED
         )
     elif visual in {"valid", "tampered", "revoked"}:
-        filename = f"artifacts/screenshots/monad-consumer-{visual}.png"
+        filename = "assets/evidence/consumer-public-valid.jpg" if visual == "valid" else f"assets/evidence/consumer-testnet-{visual}.png"
         inputs.append(filename)
         screenshot = Image.open(ROOT / filename).convert("RGB")
         # Enlarge the recorded check panel, retaining a full-page context thumbnail.
         thumbnail = screenshot.copy()
         thumbnail.thumbnail((470, 570))
         image.paste(thumbnail, (82, 237))
-        focus = screenshot.crop((638, 500, 1218, 1255))
+        focus = screenshot.crop((574, 522, 1090, 1220)) if visual == "valid" else screenshot.crop((638, 500, 1218, 1255))
         focus.thumbnail((770, 618))
         image.paste(focus, (635, 191))
         text(
             draw,
-            "实际页面截图\n右侧检查区放大\n\n独立服务\n127.0.0.1:8786\n读取真实链 10143",
+            "实际公网页面截图\n右侧检查区放大\n\n消费端已上线\nVercel Python\n读取真实链 10143" if visual == "valid" else "实际页面截图\n右侧检查区放大\n\n独立服务\n127.0.0.1:8786\n读取真实链 10143",
             (1225, 236),
             31,
             width=560,
@@ -154,13 +157,13 @@ for index, scene in enumerate(SCENES, 1):
             )
         text(
             draw,
-            "双容器：UID 10001 / 只读文件系统 / 无签名私钥\n独立消费与撤销通过，服务端签发返回 403",
+            "双容器：UID 10001 / 只读文件系统 / 无签名私钥\n两款 Vercel Python 应用匿名验证通过，服务端签发返回 403",
             (90, 465),
             31,
         )
         text(
             draw,
-            "待完成：公开托管、公开 GitHub、浏览器钱包实测、最终审阅\n尚无外部采用；来源声明不证明事实、版权或现实身份。",
+            "prooftrail-issuer.vercel.app / prooftrail-consumer.vercel.app\n公开代码：github.com/linlin449/ProofTrail\n待检查：浏览器钱包流程与最终审阅；尚无外部采用。",
             (90, 636),
             30,
             color=MUTED,

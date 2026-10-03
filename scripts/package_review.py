@@ -37,6 +37,8 @@ exact = [
     "artifacts/monad-deployment.json",
     "artifacts/vercel-entrypoint-probe.json",
     "artifacts/public-hosting-probe.json",
+    "artifacts/pitch/review-record.json",
+    "artifacts/technical/review-record.json",
     "artifacts/monad-acceptance.json",
     "artifacts/monad-container-probe.json",
     "artifacts/verification/sourcify-record.json",
@@ -53,7 +55,7 @@ patterns = {
     "examples": {".py"},
     "scripts": {".py", ".cjs", ".ps1"},
     "docs": {".md"},
-    "assets": {".png", ".svg", ".json"},
+    "assets": {".png", ".jpg", ".svg", ".json"},
 }
 paths = [root / name for name in exact]
 for folder, suffixes in patterns.items():
@@ -73,17 +75,24 @@ data = json.loads((root / "src/prooftrail/data/registry.json").read_text("utf-8"
 source_hash = hashlib.sha256((root / "contracts/ProofTrailRegistry.sol").read_bytes()).hexdigest()
 if data["sourceSha256"] != source_hash:
     raise SystemExit("Compiled artifact and source differ; run npm run compile first.")
-manifest = {
-    path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-    for path in paths
-}
+contents = {}
+for path in paths:
+    name = path.relative_to(root).as_posix()
+    payload = path.read_bytes()
+    # Match the repository's LF text policy; signed .txt and image bytes are unchanged.
+    if path.suffix not in {".txt", ".png", ".jpg"}:
+        payload = payload.replace(b"\r\n", b"\n")
+    contents[name] = payload
+manifest = {name: hashlib.sha256(payload).hexdigest() for name, payload in contents.items()}
+if manifest["contracts/ProofTrailRegistry.sol"] != source_hash:
+    raise SystemExit("Source newline normalization changes the compiled hash; stop packaging.")
 output = root / "artifacts/review"
 output.mkdir(parents=True, exist_ok=True)
 archive = output / "ProofTrail-source.zip"
 temporary = archive.with_suffix(".zip.tmp")
 with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
-    for path in paths:
-        bundle.write(path, arcname="prooftrail/" + path.relative_to(root).as_posix())
+    for name, payload in contents.items():
+        bundle.writestr("prooftrail/" + name, payload)
 with zipfile.ZipFile(temporary) as bundle:
     if bundle.testzip() is not None or len(bundle.namelist()) != len(paths):
         raise SystemExit("Archive verification failed.")
@@ -94,6 +103,7 @@ record = {
     "archiveSha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
     "sourceSha256": source_hash,
     "files": manifest,
+    "textEncodingPolicy": "LF text, matching Git; signed .txt and image bytes preserved exactly",
     "scope": "local source review only; no competition submission or external publication",
 }
 (output / "manifest.json").write_text(

@@ -128,11 +128,11 @@ def artwork(scene, number):
                 fill=MUTED if line.startswith("#") else INK,
             )
     else:
-        draw.text((1110, 268), "READY FOR LOCAL REVIEW", font=font(27, mono=True), fill=MINT)
-        wrapped(draw, "SDK / 两款应用\n70 项测试 / 中文文档", (1110, 335), 36, 650, bold=True)
+        draw.text((1110, 268), "PUBLIC APPS / REVIEW DRAFT", font=font(27, mono=True), fill=MINT)
+        wrapped(draw, "SDK / 两款在线应用\n77 项测试 / 中文文档", (1110, 335), 36, 650, bold=True)
         draw.line((1110, 477, 1778, 477), fill=PAPER, width=3)
         draw.text((1110, 513), "NEXT / NOT YET COMPLETE", font=font(27, mono=True), fill=VIOLET)
-        wrapped(draw, "公开产品 / GitHub\n最终技术视频 / 用户检查", (1110, 580), 34, 650)
+        wrapped(draw, "钱包操作实测\n最终视频 / 用户检查", (1110, 580), 34, 650)
     box(draw, (70, 823, 1850, 1013), fill=INK)
     used = wrapped(draw, scene["english"], (104, 846), 33, 1705, fill="#F6FAFF", spacing=9)
     if used > 158:

@@ -1,0 +1,18 @@
+{
+  "kind": "synthetic narration review draft; code-native artwork, not a live screen recording",
+  "durationSeconds": 111.409017,
+  "sceneDurations": [
+    15.511655328798184,
+    16.51931972789116,
+    17.429342403628116,
+    18.054331065759637,
+    17.81514739229025,
+    26.041179138321993
+  ],
+  "voice": "Microsoft Huihui Desktop (generic Chinese synthetic voice)",
+  "sha256": "1b206e9eeb47e790b5115ef6dcf45e83f00363d5cdbec165950228e102e67eb5",
+  "bytes": 2171065,
+  "videoCodec": "h264",
+  "audioCodec": "aac",
+  "submitted": false
+}

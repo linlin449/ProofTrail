@@ -1,0 +1,19 @@
+{
+  "kind": "Actual UI screenshots and recorded transaction evidence; synthetic narration; not continuous wallet footage",
+  "durationSeconds": 162.903896,
+  "sha256": "42845302295f0bdc43e9f262ef45a993789fcca1404332dae2b911e2f537772d",
+  "bytes": 3656192,
+  "sourceHashes": {
+    "assets/technical-scenes.json": "72d9159565f6ed450e60184f7dd385baa1e3c453513670ed17f078d52ac2cdbd",
+    "artifacts/monad-deployment.json": "c01cb1cc2fcbf64949e5abcaa83e66baac45b7c7e00ef3fd145c682664b80ceb",
+    "artifacts/monad-acceptance.json": "85d0312f7505313ee2c0d0e6290a8d96470a6271e93766c5716dfd56bc9a14f0",
+    "artifacts/verification/sourcify-record.json": "6c441735e504b4a3d20feaafe45af1b7f72012c9f4af54ad8e8575b95d63955c",
+    "artifacts/monad-demo/independent-cli-checks.json": "0cc5cf8424a25719ed1f1974fb27ce28db4e82f3012da6045a91d814f09c1fc5",
+    "artifacts/public-hosting-probe.json": "b9acb635b689edfb20488ad860dfafc2dc7abfc1f6f17e1d3bcbcd6db90b755c",
+    "assets/evidence/consumer-public-valid.jpg": "df2825e1196396bcc623614a06810cde16abd61bdbba14732329ae4332278fa9",
+    "assets/evidence/consumer-testnet-tampered.png": "87202e629fcf5cb5de9f3605306e2649079b7d52da1f82982a035149de535b69",
+    "assets/evidence/consumer-testnet-revoked.png": "28ad20250287ffa052c6f28ea79848f92a16c28646f15c37ae9ff6594c09a02d"
+  },
+  "walletBrowserFlowVerified": false,
+  "submitted": false
+}
