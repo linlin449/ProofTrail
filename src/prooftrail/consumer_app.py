@@ -3,7 +3,7 @@
 import mimetypes
 from importlib.resources import files
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import Field
@@ -11,6 +11,7 @@ from pydantic import Field
 from .chain import Registry
 from .models import ReceiptBundle, StrictModel
 from .protocol import verify_receipt
+from .public_example import public_example
 from .web_security import protect_app
 
 
@@ -37,7 +38,15 @@ def create_consumer_app(registry: Registry) -> FastAPI:
             "chainId": registry.domain.chainId,
             "contract": registry.domain.verifyingContract,
             "issuerApiRequired": False,
+            "exampleAvailable": public_example(registry) is not None,
         }
+
+    @app.get("/api/example")
+    def example():
+        data = public_example(registry)
+        if data is None:
+            raise HTTPException(404, "当前可信网络与合约没有预置公开样例")
+        return data
 
     @app.get("/health")
     def health():

@@ -8,6 +8,17 @@ function clearResult() {
   $('title').textContent = ''; $('issuer').textContent = ''; $('preview-content').textContent = '';
 }
 ['content', 'bundle'].forEach(id => $(id).addEventListener('input', clearResult));
+$('load-chain-example').addEventListener('click', async () => {
+  const button = $('load-chain-example'); button.disabled = true;
+  clearResult(); const current = revision;
+  try {
+    const example = await request('/api/example');
+    if (current !== revision) return;
+    $('content').value = example.content; $('bundle').value = JSON.stringify(example.bundle, null, 2);
+    $('summary').textContent = example.note;
+  } catch (error) { if (current === revision) $('summary').textContent = error.message; }
+  finally { button.disabled = false; }
+});
 async function request(path, body) {
   const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 40000);
   try {
@@ -61,4 +72,5 @@ request('/api/info').then(info => {
   $('network').textContent = info.mode === 'local' ? '本地 EVM 检查模式' : 'Monad Testnet';
   $('mode').textContent = info.mode === 'local' ? '本地双应用演示：两个服务共用内存测试链，消费端独立调用 SDK，不访问发行服务的 API 或凭证库。' : '本服务独立读取 Monad 测试网。原文与凭证只供本次检查，签发应用无需在线。';
   $('contract').textContent = `可信链 ${info.chainId} / 合约 ${info.contract}`;
+  $('load-chain-example').hidden = !info.exampleAvailable;
 }).catch(error => {$('network').textContent = '连接未完成'; $('mode').textContent = error.message;});

@@ -19,6 +19,7 @@ from .protocol import (
     typed_data,
     verify_receipt,
 )
+from .public_example import public_example
 from .web_security import protect_app
 
 
@@ -87,8 +88,16 @@ def create_app(registry: Registry | None = None) -> FastAPI:
             "issuer": registry.w3.eth.accounts[0] if registry.mode == "local" else None,
             "protocol": "prooftrail/1",
             "maxBatchSize": 64,
+            "exampleAvailable": public_example(registry) is not None,
             "disclaimer": "凭证证明发行者声明与字节完整性，不证明事实、版权或实际模型执行",
         }
+
+    @app.get("/api/example")
+    def example():
+        data = public_example(registry)
+        if data is None:
+            raise HTTPException(404, "当前可信网络与合约没有预置公开样例")
+        return data
 
     @app.post("/api/demo/issue")
     def issue(payload: IssueRequest, request: Request):

@@ -2,7 +2,7 @@
   "name": "prooftrail-contracts",
   "version": "0.1.0",
   "private": true,
-  "scripts": {"compile": "node scripts/compile.cjs", "test:vectors": "node scripts/check-vector.cjs"},
+  "scripts": {"compile": "node scripts/compile.cjs", "test:vectors": "node scripts/check-vector.cjs", "test:wallet-ui": "node --test scripts/check-wallet-ui.cjs"},
   "devDependencies": {"solc": "0.8.28", "ethers": "6.17.0"},
   "overrides": {"tmp": "0.2.7"}
 }

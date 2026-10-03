@@ -1,6 +1,6 @@
 'use strict';
 const $ = id => document.getElementById(id);
-let info, currentBundle, originalContent = '', recent = [], timer, verificationRevision = 0;
+let info, currentBundle, issuedBundle, originalContent = '', recent = [], timer, verificationRevision = 0;
 const sample = 'AI 内容可以被复制、修改和重新发布。\n\n一份签名凭证记录发行者的声明，原文哈希帮助发现字节变化，链上登记让另一应用独立查询。撤销用于纠正已经发行的错误版本。\n\n来源可验证，并不意味着内容一定真实。';
 function toast(message, error = false) {
   clearTimeout(timer); const node = $('notification'); node.textContent = message;
@@ -46,31 +46,37 @@ function loadBundle(bundle, content) {
   $('bundle-input').value = JSON.stringify(bundle, null, 2);
   $('revoke-button').disabled = false;
 }
-function renderReceipt(bundle, tx) {
-  $('receipt-empty').hidden = true; $('receipt-result').hidden = false; $('receipt-state').textContent = '已登记';
+function renderReceipt(bundle, tx, state = '已登记', hash = '') {
+  issuedBundle = bundle;
+  $('receipt-empty').hidden = true; $('receipt-result').hidden = false; $('receipt-state').textContent = state;
   $('receipt-title').textContent = bundle.metadata.title;
   setHash('receipt-issuer', bundle.claim.issuer); setHash('receipt-id', bundle.receiptId); setHash('receipt-root', bundle.root);
-  $('receipt-count').textContent = `${bundle.batchCount} 份 / 1 笔登记交易`;
-  $('receipt-gas').textContent = Number(tx.gasUsed).toLocaleString();
-  $('receipt-amortized').textContent = (tx.gasUsed / bundle.batchCount).toLocaleString(undefined, {maximumFractionDigits: 2});
-  $('receipt-latency').textContent = `${tx.elapsedMs.toLocaleString()} ms`;
-  $('receipt-network-note').textContent = info.mode === 'local'
+  $('receipt-count').textContent = `${bundle.batchCount} 份 / ${tx ? '1 笔已确认登记交易' : '登记尚未确认'}`;
+  $('receipt-gas').textContent = tx ? Number(tx.gasUsed).toLocaleString() : '—';
+  $('receipt-amortized').textContent = tx ? (tx.gasUsed / bundle.batchCount).toLocaleString(undefined, {maximumFractionDigits: 2}) : '—';
+  $('receipt-latency').textContent = tx ? `${tx.elapsedMs.toLocaleString()} ms` : '—';
+  $('receipt-transaction').textContent = hash || (tx && tx.transactionHash) || '尚未取得交易哈希';
+  $('receipt-network-note').textContent = !tx
+    ? (hash ? '交易已发出，登记尚未确认。请备份凭证与交易哈希，稍后独立验证；不要重复登记。' : '签名凭证已生成，链上登记尚未完成。可先下载备份；独立验证会检查实际登记状态。')
+    : info.mode === 'local'
     ? '本地 EVM 实测 Gas。耗时包含本地执行与服务查询，不能代表 Monad 网络延迟。'
     : '当前可信合约实际交易。耗时包含钱包操作、网络确认与服务查询。';
 }
 function renderRecent() {
   const root = $('recent'); root.replaceChildren(); root.className = '';
   if (!recent.length) { root.className = 'recent-empty'; root.textContent = '还没有签发记录。先登记一份内容。'; return; }
-  recent.slice(0, 10).forEach(({bundle, content}) => {
+  recent.forEach(({bundle, content, registration}) => {
     const row = document.createElement('div'); row.className = 'recent-row';
     const icon = document.createElement('span'); icon.className = 'recent-icon'; icon.textContent = '↗';
     const label = document.createElement('div'); label.className = 'recent-label';
     const title = document.createElement('strong'); title.textContent = bundle.metadata.title;
-    const id = document.createElement('code'); id.textContent = shorten(bundle.receiptId); label.append(title, id);
+    const id = document.createElement('code'); id.textContent = shorten(bundle.receiptId) + ' · ' + (registration || '登记状态待检查'); label.append(title, id);
     const button = document.createElement('button'); button.type = 'button'; button.textContent = '验证 →';
     button.addEventListener('click', () => { loadBundle(bundle, content); selectTab('verify');
       if (content === undefined) toast('凭证已载入；原文不由服务器保存，请填入原文。'); });
-    row.append(icon, label, button); root.append(row);
+    const download = document.createElement('button'); download.type = 'button'; download.textContent = '下载 JSON';
+    download.addEventListener('click', () => downloadBundle(bundle));
+    row.append(icon, label, download, button); root.append(row);
   });
 }
 async function walletAccount() {
@@ -100,7 +106,7 @@ $('issue-form').addEventListener('submit', async event => {
       mediaType: 'text/plain;charset=utf-8', model: $('model').value, application: $('application').value},
     parentId: $('parent-id').value.trim() || '0x' + '00'.repeat(32), expiresAt
   }));
-  let pendingHash;
+  let pendingHash, preparedResult, sessionEntries;
   try {
     const started = performance.now(); let result;
     if (info.mode === 'local') result = await api('/api/demo/issue', {artifacts});
@@ -114,26 +120,38 @@ $('issue-form').addEventListener('submit', async event => {
           claim: prepared.claim, metadata: prepared.metadata, signature: signature.toLowerCase(), receiptId: prepared.receiptId});
       }
       result = await api('/api/batch', {receipts});
-      // Keep portable receipts before requesting the transaction, including failure cases.
+      // Make every signed bundle downloadable before the wallet can reject or a poll can fail.
+      preparedResult = result;
+      sessionEntries = result.bundles.map((bundle, i) => ({bundle, content: artifacts[i].content, registration: '登记未确认'}));
+      recent.unshift(...sessionEntries); renderRecent();
       loadBundle(result.bundles[0], base);
+      renderReceipt(result.bundles[0], null, '已签名 · 尚未登记');
       pendingHash = await window.ethereum.request({method: 'eth_sendTransaction', params: [result.transaction]});
-      $('receipt-state').textContent = '等待交易确认';
+      renderReceipt(result.bundles[0], null, '等待交易确认', pendingHash);
       result.transaction = await waitTransaction(pendingHash);
       result.transaction.elapsedMs = Math.round(performance.now() - started);
     }
     loadBundle(result.bundles[0], base); renderReceipt(result.bundles[0], result.transaction);
-    result.bundles.forEach((bundle, i) => recent.unshift({bundle, content: artifacts[i].content}));
+    if (sessionEntries) sessionEntries.forEach(entry => { entry.registration = '已登记'; });
+    else result.bundles.forEach((bundle, i) => recent.unshift({bundle, content: artifacts[i].content, registration: '已登记'}));
     renderRecent(); toast(`${count} 份凭证已登记，使用 1 笔真实交易。`);
-  } catch (error) { toast(error.message + (pendingHash ? ` 交易 ${pendingHash}` : ''), true); }
+  } catch (error) {
+    if (preparedResult) renderReceipt(preparedResult.bundles[0], null, '登记未完成 · 可备份', pendingHash);
+    toast(error.message + (pendingHash ? ` 交易 ${pendingHash}` : ''), true);
+  }
   finally { button.disabled = false; button.textContent = '签发并登记凭证 ↗'; }
 });
-$('download-bundle').addEventListener('click', () => {
-  if (!currentBundle) return;
-  const url = URL.createObjectURL(new Blob([JSON.stringify(currentBundle, null, 2) + '\n'], {type: 'application/json'}));
-  const link = document.createElement('a'); link.href = url; link.download = 'prooftrail-' + currentBundle.receiptId.slice(2, 12) + '.json';
+function downloadBundle(bundle) {
+  if (!bundle) return;
+  const url = URL.createObjectURL(new Blob([JSON.stringify(bundle, null, 2) + '\n'], {type: 'application/json'}));
+  const link = document.createElement('a'); link.href = url; link.download = 'prooftrail-' + bundle.receiptId.slice(2, 12) + '.json';
   link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+$('download-bundle').addEventListener('click', () => downloadBundle(issuedBundle));
+$('go-verify').addEventListener('click', () => {
+  const entry = recent.find(item => item.bundle.receiptId === issuedBundle.receiptId);
+  loadBundle(issuedBundle, entry && entry.content); selectTab('verify'); $('verify-form').requestSubmit();
 });
-$('go-verify').addEventListener('click', () => { selectTab('verify'); $('verify-form').requestSubmit(); });
 function invalidateVerification() {
   verificationRevision++;
   $('verify-status').textContent = '等待重新验证'; $('verify-status').className = '';
@@ -142,6 +160,18 @@ function invalidateVerification() {
 }
 $('verify-content').addEventListener('input', invalidateVerification);
 $('bundle-input').addEventListener('input', invalidateVerification);
+$('load-chain-example').addEventListener('click', async () => {
+  const button = $('load-chain-example'); button.disabled = true;
+  invalidateVerification(); const revision = verificationRevision;
+  try {
+    const example = await api('/api/example');
+    if (revision !== verificationRevision) return;
+    loadBundle(example.bundle, example.content);
+    $('verify-summary').textContent = example.note;
+    toast('已载入真实链上公开样例；点击独立验证读取最新状态。');
+  } catch (error) { if (revision === verificationRevision) toast(error.message, true); }
+  finally { button.disabled = false; }
+});
 $('tamper').addEventListener('click', () => { $('verify-content').value += '\n[这段内容在签发后被修改]'; invalidateVerification(); toast('已修改待验证内容；运行验证查看哪一项失败。'); });
 $('restore').addEventListener('click', () => { if (!originalContent) return toast('当前会话没有原文；请手动填入。', true); $('verify-content').value = originalContent; invalidateVerification(); });
 $('bundle-file').addEventListener('change', async event => {
@@ -213,6 +243,10 @@ async function init() {
       : 'Monad 测试网：验证直接读取可信合约。签发与撤销使用你自己的钱包，服务器不持有发行者私钥。';
     $('signing-note').textContent = info.mode === 'local' ? '演示使用本地 EVM 测试账户，不需要真实资产。' : '钱包将请求签名与测试网登记交易；不要提供私钥给服务器。';
     $('contract-info').textContent = '可信合约：' + info.contract; $('contract-info').title = 'Chain ID: ' + info.chainId;
+    $('load-chain-example').hidden = !info.exampleAvailable;
+    $('integration-network-note').textContent = info.mode === 'local'
+      ? '本地演示凭证属于本次内存测试链。切换网络后，可信域检查会拒绝旧凭证。'
+      : '公开样例属于当前 Monad 测试网合约；消费者独立读取登记与撤销状态，无需连接钱包。';
     const result = await api('/api/receipts'); recent = result.bundles.map(bundle => ({bundle})); renderRecent();
   } catch (error) { $('network-name').textContent = '连接未完成'; $('mode-note').textContent = '无法连接可信合约。请检查服务配置，再刷新页面。'; toast(error.message, true); }
 }

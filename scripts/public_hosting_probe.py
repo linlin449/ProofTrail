@@ -29,6 +29,14 @@ def probe(role, base):
         info = checks["/api/info"]["body"]
         assert info["mode"] == "monad" and info["chainId"] == 10143
         assert info["contract"] == CONTRACT
+        assert info["exampleAvailable"] is True
+        example_response = client.get(base + "/api/example")
+        example_response.raise_for_status()
+        example = example_response.json()
+        assert example["content"].encode("utf-8") == (ROOT / "artifacts/monad-demo/content.txt").read_bytes()
+        assert example["bundle"] == json.loads((ROOT / "artifacts/monad-demo/receipt.json").read_text("utf-8"))
+        assert "status" not in example and "verification" not in example
+        checks["/api/example"] = {"httpStatus": example_response.status_code, "originalBytesPreserved": True, "containsVerdict": False}
         cases = {}
         endpoint = "/api/verify" if role == "issuer" else "/api/assess"
         for name, prefix, altered, expected in (

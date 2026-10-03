@@ -6,6 +6,8 @@ The hackathon draft is in **Trust, Identity & AI Infrastructure**. Implementatio
 
 ## Run locally
 
+No wallet is required to try the [independent consumer](https://prooftrail-consumer.vercel.app): choose the public live-chain example and run the check. The sample is synthetic, its original signed bytes are preserved, and verification reads current Monad state rather than returning a canned verdict.
+
 ```sh
 uv sync --extra dev --group dev
 npm ci --ignore-scripts
@@ -20,6 +22,7 @@ Open http://127.0.0.1:8765. The default uses a real local PyEVM execution of the
 ```sh
 uv run pytest -q
 npm run test:vectors
+npm run test:wallet-ui
 uv run ruff check .
 ```
 

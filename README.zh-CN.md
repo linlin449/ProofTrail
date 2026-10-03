@@ -8,6 +8,8 @@ ProofTrail 面向 AI 应用开发者与内容平台，提供 Python SDK、独立
 
 **在线使用**：[签发工作台](https://prooftrail-issuer.vercel.app) · [独立知识发布检查](https://prooftrail-consumer.vercel.app)。两个 Python FastAPI 项目部署于 Vercel Hobby，匿名公网验证已通过；有效凭证通过、内容篡改与链上撤销被拒绝。浏览器钱包签名/发送流程仍待用户实测。原始检查记录：`artifacts/public-hosting-probe.json`。
 
+无需钱包即可体验：在独立知识发布检查点击“载入真实链上样例”，再运行检查；修改原文后再查即可看到篡改失败。签发自己的凭证才需要钱包。[中文操作与接入指南](docs/操作与接入.md) 包含签发步骤与交易失败后的凭证备份说明。
+
 ## 先看这些中文文档
 
 - [要完成的工作、验收门槛与排期](docs/工作计划.md)
