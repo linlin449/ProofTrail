@@ -18,8 +18,8 @@ dev = ["pytest>=8.3,<10", "ruff>=0.11,<1"]
 prooftrail = "prooftrail.cli:main"
 
 [[tool.uv.index]]
-name = "tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+name = "pypi"
+url = "https://pypi.org/simple"
 default = true
 
 [dependency-groups]
