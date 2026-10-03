@@ -64,4 +64,4 @@ uv run python -m prooftrail verify artifacts/monad-demo/revoked-content.txt arti
 
 ## 仍待验收
 
-浏览器钱包注入、账户授权、EIP-712 钱包签名和发送交易的实际用户流程尚未完成。Python 专用测试账户签名证明链上协议可运行，不能替代浏览器钱包实测。公开托管、公开 GitHub、最终技术视频与用户确认仍待完成。
+浏览器钱包注入、账户授权、EIP-712 钱包签名和发送交易的实际用户流程尚未完成。Python 专用测试账户签名证明链上协议可运行，不能替代浏览器钱包实测。公开 GitHub 已完成并核对干净克隆；公开托管、最终技术视频确认与用户检查仍待完成。
