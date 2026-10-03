@@ -2,9 +2,9 @@
   {
     "title": "内容走远了，\n出处不该留在原地。",
     "tag": "PORTABLE PROVENANCE",
-    "body": "ProofTrail\n给 Python 应用的可移植来源凭证",
-    "narration": "人工智能内容被复制后，出处声明和撤销状态往往留在原来的平台。另一个应用只能继续相信平台。ProofTrail 让内容携带可独立检查的来源凭证。",
-    "english": "AI outputs travel across applications, while provenance and revocation often stay behind. ProofTrail lets content carry independently verifiable receipts.",
+    "body": "ProofTrail\n单人 Python 开发 · Codex 辅助编码\n给应用的可移植来源凭证",
+    "narration": "ProofTrail 是单人 Python 项目，使用 Codex 辅助编码。内容复制后，出处和撤销状态常留在原平台。我们让来源凭证随内容流动，由另一应用独立检查。",
+    "english": "ProofTrail is a solo Python project built with Codex assistance. Content travels between apps while provenance and revocation often stay behind. Portable receipts let another application check independently.",
     "visual": "receipt"
   },
   {
