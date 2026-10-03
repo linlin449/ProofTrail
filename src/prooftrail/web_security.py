@@ -11,6 +11,10 @@ def protect_app(app: FastAPI):
     default_hosts = "127.0.0.1,localhost,testserver"
     if os.getenv("RENDER") == "true" and os.getenv("RENDER_EXTERNAL_HOSTNAME"):
         default_hosts += "," + os.environ["RENDER_EXTERNAL_HOSTNAME"]
+    if os.getenv("VERCEL") == "1":
+        for name in ("VERCEL_URL", "VERCEL_BRANCH_URL", "VERCEL_PROJECT_PRODUCTION_URL"):
+            if os.getenv(name):
+                default_hosts += "," + os.environ[name]
     app.add_middleware(
         TrustedHostMiddleware,
         allowed_hosts=os.getenv("PROOFTRAIL_ALLOWED_HOSTS", default_hosts).split(","),

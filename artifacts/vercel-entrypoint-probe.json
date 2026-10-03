@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "scope": "local ASGI entrypoint against real Monad; not public hosting",
+  "checkedAt": "2026-10-03T03:49:58.650637+00:00",
+  "checks": {
+    "issuer": {
+      "health": {
+        "status": "ok",
+        "mode": "monad"
+      },
+      "info": {
+        "mode": "monad",
+        "chainId": 10143,
+        "contract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+        "domain": {
+          "name": "ProofTrail",
+          "version": "1",
+          "chainId": 10143,
+          "verifyingContract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+        },
+        "localWrites": false,
+        "issuer": null,
+        "protocol": "prooftrail/1",
+        "maxBatchSize": 64,
+        "disclaimer": "凭证证明发行者声明与字节完整性，不证明事实、版权或实际模型执行"
+      },
+      "cases": {
+        "valid": "valid",
+        "tampered": "invalid",
+        "revoked": "invalid"
+      }
+    },
+    "consumer": {
+      "health": {
+        "status": "ok",
+        "chainId": 10143
+      },
+      "info": {
+        "mode": "monad",
+        "chainId": 10143,
+        "contract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+        "issuerApiRequired": false
+      },
+      "cases": {
+        "valid": "valid",
+        "tampered": "invalid",
+        "revoked": "invalid"
+      }
+    }
+  }
+}

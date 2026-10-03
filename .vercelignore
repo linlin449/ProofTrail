@@ -1,0 +1,12 @@
+# Only public runtime source and locked dependencies may leave this checkout.
+**
+!main.py
+!vercel.json
+!pyproject.toml
+!uv.lock
+!README.zh-CN.md
+!LICENSE
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc
