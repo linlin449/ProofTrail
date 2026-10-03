@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.png -text
+# Signed samples must retain the exact original bytes on every operating system.
+artifacts/monad-demo/*.txt -text

@@ -10,6 +10,7 @@ root = Path(__file__).resolve().parents[1]
 exact = [
     ".env.example",
     ".gitignore",
+    ".gitattributes",
     ".dockerignore",
     "Dockerfile",
     "compose.yaml",
