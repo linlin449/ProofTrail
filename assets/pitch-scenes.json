@@ -1,0 +1,50 @@
+[
+  {
+    "title": "内容走远了，\n出处不该留在原地。",
+    "tag": "PORTABLE PROVENANCE",
+    "body": "ProofTrail\n给 Python 应用的可移植来源凭证",
+    "narration": "人工智能内容被复制后，出处声明和撤销状态往往留在原来的平台。另一个应用只能继续相信平台。ProofTrail 让内容携带可独立检查的来源凭证。",
+    "english": "AI outputs travel across applications, while provenance and revocation often stay behind. ProofTrail lets content carry independently verifiable receipts.",
+    "visual": "receipt"
+  },
+  {
+    "title": "一份凭证，\n两款应用。",
+    "tag": "ISSUE / CARRY / VERIFY",
+    "body": "Research Studio 签发\nKnowledge Publisher 独立检查",
+    "narration": "发行应用对原文字节哈希和元数据签名，生成 JSON 凭证。另一款知识发布应用用自己的可信合约和 Python 验证器独立检查，不依赖发行者的凭证库或接口。",
+    "english": "An issuer signs content and metadata. A second app checks the portable JSON using its own trusted registry and Python verifier, without the issuer's database.",
+    "visual": "flow"
+  },
+  {
+    "title": "每次使用，\n检查当前状态。",
+    "tag": "INTEGRITY / LIFECYCLE",
+    "body": "改一个字，完整性失败\n发行者撤销，下载副本也会失败",
+    "narration": "项目已在真实 Monad 测试网运行。原文一致时生成私有预览，改一个字后完整性失败。发行者撤销后，即使恢复原文，独立消费端也会读取新状态，拒绝预览。",
+    "english": "The project runs on Monad testnet. The independent consumer accepts intact content, rejects changed bytes, and reads live revocation. Downloaded receipts can become invalid.",
+    "visual": "states"
+  },
+  {
+    "title": "批量根上链，\n原文留在链下。",
+    "tag": "ONE ROOT / MANY RECEIPTS",
+    "body": "每张凭证携带自己的 Merkle 路径\n登记交易数随批量减少",
+    "narration": "一笔交易登记批量根，每张凭证保留包含证明。实际 Monad 测试中，三十二份共用一笔登记，均摊 Gas 约两千七百五十八。这是单次登记成本，不代表网络吞吐或最终性。",
+    "english": "A root anchors a batch with per-receipt proofs. Actual Monad testnet measurement: 32 receipts in one registration, about 2,758 gas per receipt. This is not a throughput or finality benchmark.",
+    "visual": "batch"
+  },
+  {
+    "title": "从 Python\n开发者开始。",
+    "tag": "BUILDERS / ADOPTION",
+    "body": "研究助手 → 知识发布工具\n先测接入体验，再谈外部采用",
+    "narration": "先服务 Python 研究助手和知识发布工具开发者。项目已有 SDK、命令行和中文接入文档。下一步请开发者完成跨应用任务，测量接入体验。目前尚无外部采用。",
+    "english": "Start with Python research assistants and knowledge publishers. The SDK, CLI and Chinese integration guide are ready. Measure real integration feedback next; no external adoption is claimed.",
+    "visual": "sdk"
+  },
+  {
+    "title": "可检查的原型，\n清楚的下一步。",
+    "tag": "REVIEW DRAFT / NOT SUBMITTED",
+    "body": "70 项自动测试通过\n源码与中文文档可在本机复现",
+    "narration": "原型通过七十项测试与跨语言协议校验，合约源码精确匹配。下一步完成在线产品和技术视频。来源声明不证明事实、版权或现实身份。这是合成旁白审阅草稿，尚未提交。",
+    "english": "The prototype passes 70 tests and cross-language checks, with exact-match contract verification. Hosting and the technical video remain next. Provenance is not truth, copyright or identity. Synthetic narration; not submitted.",
+    "visual": "next"
+  }
+]

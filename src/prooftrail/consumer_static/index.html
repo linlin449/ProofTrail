@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knowledge Publisher · 独立发布检查</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body><header><a href="/" aria-label="Knowledge Publisher 首页">KP <span>Knowledge Publisher</span></a><span id="network">连接中</span></header>
+<main><p class="eyebrow">APPLICATION B / INDEPENDENT CONSUMER</p><h1>接住内容，<br>检查它的出处。</h1>
+<p class="intro">这是另一款应用的发布前检查。导入原文与凭证，用本应用的 Python SDK 读取可信链，无需请求签发平台。</p>
+<p id="mode" class="note"></p><div class="workspace"><form id="form"><h2>检查投稿内容</h2>
+<label for="content">原文 <span>按 UTF-8 字节，不改变空格和换行</span></label><textarea id="content" rows="7" maxlength="50000" required></textarea>
+<label for="bundle">可移植凭证 JSON</label><textarea id="bundle" rows="8" spellcheck="false" required></textarea>
+<label class="upload" for="file">导入 JSON 文件 ↓</label><input id="file" type="file" accept=".json,application/json">
+<button id="submit" type="submit">检查并生成预览 →</button><p class="fine">原文会发送给本应用的验证服务，不写入链上或保存为投稿。预览不会公开发布。</p></form>
+<section aria-live="polite"><p class="eyebrow">PUBLISHING PREFLIGHT</p><h2 id="status">等待原文和凭证</h2><p id="summary">本应用固定可信网络与合约，拒绝凭证自带的任意网络配置。</p><ul id="checks"></ul>
+<article id="preview" hidden><p class="eyebrow">PRIVATE PREVIEW</p><h3 id="title"></h3><p id="issuer" class="mono"></p><div id="preview-content"></div></article></section></div>
+<footer><p id="contract" class="mono"></p><p>来源证据通过不等于事实、版权或现实身份已认证。撤销状态可能变化，正式使用前请重新检查。</p></footer></main></body></html>

@@ -1,0 +1,11 @@
+{
+  "imageId": "sha256:82b87a987f4034710937b88824cf8417f67adbb83b0144a8cd98ba6621272557",
+  "pythonBaseDigest": "sha256:dddfd7e07f9d15aeeca61529320492139d21cac7f0070c00609243e51e4e0016",
+  "uvBaseDigest": "sha256:d0a6eca6c669dc7e9c51218707b8438a3d30402733d739dcc00adb3e213e8f5c",
+  "checkedAtUtc": "2026-10-02T16:11:06.2837521Z",
+  "user": "10001:10001",
+  "filesystem": "read-only",
+  "network": "none",
+  "dockerHealth": "healthy",
+  "monadDeploymentVerified": false
+}

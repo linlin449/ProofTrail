@@ -1,0 +1,35 @@
+{
+  "chainId": 10143,
+  "address": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+  "requestedAtUtc": "2026-10-03T02:36:19.712788+00:00",
+  "ticket": {
+    "verificationId": "f57aed0b-bb17-4afc-af0f-2f6960dee9c2"
+  },
+  "sourceSha256": "a728957d9edce03f89cd1f0c8df6e1b8ee7577839eb8d45c26296f9698734307",
+  "repositoryUrl": "https://repo.sourcify.dev/10143/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+  "job": {
+    "isJobCompleted": true,
+    "verificationId": "f57aed0b-bb17-4afc-af0f-2f6960dee9c2",
+    "jobStartTime": "2026-10-03T02:36:19Z",
+    "jobFinishTime": "2026-10-03T02:36:19Z",
+    "compilationTime": "133",
+    "externalVerifications": {
+      "etherscan": {
+        "verificationId": "vuhkzvjk7jxxmfq5fymqury86yaykrmsn58cyzhghdjvu45mgr",
+        "statusUrl": "https://api.etherscan.io/v2/api?chainid=10143&module=contract&action=checkverifystatus&guid=vuhkzvjk7jxxmfq5fymqury86yaykrmsn58cyzhghdjvu45mgr",
+        "explorerUrl": "https://testnet.monadscan.com//address/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+        "contractApiUrl": "https://api.etherscan.io/v2/api?chainid=10143&module=contract&action=getabi&address=0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+      }
+    },
+    "contract": {
+      "match": "exact_match",
+      "creationMatch": "exact_match",
+      "runtimeMatch": "exact_match",
+      "chainId": "10143",
+      "address": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+      "verifiedAt": "2026-10-03T02:36:19Z",
+      "matchId": "54547907"
+    }
+  },
+  "checkedAtUtc": "2026-10-03T02:37:11.466564+00:00"
+}

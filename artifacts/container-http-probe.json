@@ -1,0 +1,12 @@
+{
+  "transport": "actual loopback HTTP",
+  "localEvmOnly": true,
+  "health": "ok",
+  "issue": "passed",
+  "verification": "passed",
+  "tampering": "rejected",
+  "revocation": "rejected",
+  "transactionHash": "0x5f8f01922f500f01e43bb05700985f095e50a8969e5b15761104dd81ea9e5dc7",
+  "contract": "0xF2E246BB76DF876Cef8b38ae84130F4F55De395b",
+  "chainId": 131277322940537
+}

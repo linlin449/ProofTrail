@@ -1,0 +1,34 @@
+# Two independent, keyless web services. Actual URLs are assigned by Render on deployment.
+services:
+  - type: web
+    name: prooftrail-issuer
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: serve --mode monad --host 0.0.0.0 --port 8765
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PORT
+        value: "8765"
+      - key: PROOFTRAIL_RPC_URL
+        value: https://testnet-rpc.monad.xyz
+      - key: PROOFTRAIL_CONTRACT
+        value: "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+  - type: web
+    name: prooftrail-consumer
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: consumer --host 0.0.0.0 --port 8765 --rpc https://testnet-rpc.monad.xyz --contract 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PORT
+        value: "8765"

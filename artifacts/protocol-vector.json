@@ -1,0 +1,138 @@
+{
+  "testOnly": true,
+  "content": "研究笔记\nExact bytes matter.\n",
+  "typedData": {
+    "domain": {
+      "name": "ProofTrail",
+      "version": "1",
+      "chainId": 10143,
+      "verifyingContract": "0x1111111111111111111111111111111111111111"
+    },
+    "primaryType": "Receipt",
+    "types": {
+      "EIP712Domain": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "name": "chainId",
+          "type": "uint256"
+        },
+        {
+          "name": "verifyingContract",
+          "type": "address"
+        }
+      ],
+      "Receipt": [
+        {
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "name": "contentHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "metadataHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "parentId",
+          "type": "bytes32"
+        },
+        {
+          "name": "salt",
+          "type": "bytes32"
+        },
+        {
+          "name": "issuedAt",
+          "type": "uint64"
+        },
+        {
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ]
+    },
+    "message": {
+      "issuer": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+      "contentHash": "0xad056ca3e686fae1e6fec5b9d9b13bceb8633a3d181c27179e8b50a5a0bce574",
+      "metadataHash": "0xb9af74321daa1fffaab44de5440294a99906c74a1ba9841aed9d8a88a6b316b3",
+      "parentId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "salt": "0x2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a",
+      "issuedAt": 1700000000,
+      "expiresAt": 0
+    }
+  },
+  "bundles": [
+    {
+      "schemaVersion": "prooftrail/1",
+      "domain": {
+        "name": "ProofTrail",
+        "version": "1",
+        "chainId": 10143,
+        "verifyingContract": "0x1111111111111111111111111111111111111111"
+      },
+      "claim": {
+        "issuer": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+        "contentHash": "0xad056ca3e686fae1e6fec5b9d9b13bceb8633a3d181c27179e8b50a5a0bce574",
+        "metadataHash": "0xb9af74321daa1fffaab44de5440294a99906c74a1ba9841aed9d8a88a6b316b3",
+        "parentId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "salt": "0x2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a",
+        "issuedAt": 1700000000,
+        "expiresAt": 0
+      },
+      "metadata": {
+        "title": "跨语言测试 · Research",
+        "mediaType": "text/plain;charset=utf-8",
+        "model": "test-only",
+        "application": "Fixture Studio"
+      },
+      "signature": "0xfe1468d01a7521b07e1310d5891a6ec41b51b4136a6e39e22a7e7087d75dec1f0a943b4a02358ae4c5b959f9ff3878bd6368606198817e7cc4207276e94db41d1c",
+      "receiptId": "0x97b4d852eccbf6e786933e79b6a4451de93a36c477812f8e42c61d010099c881",
+      "batchId": "0x5033af7121543e7705f1252ac31d40d3c18e37ccd73a0ab8c87926243f96090b",
+      "root": "0xe6086e6aa2e091cf0823a119a911c080f4655d8f32d5e886e332b217a7942ff5",
+      "proof": [
+        "0x78213af2f1e97cbb5b447bed3a11cda3fdd1437999abe682f865e28a0031f65f"
+      ],
+      "batchCount": 2
+    },
+    {
+      "schemaVersion": "prooftrail/1",
+      "domain": {
+        "name": "ProofTrail",
+        "version": "1",
+        "chainId": 10143,
+        "verifyingContract": "0x1111111111111111111111111111111111111111"
+      },
+      "claim": {
+        "issuer": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+        "contentHash": "0xad056ca3e686fae1e6fec5b9d9b13bceb8633a3d181c27179e8b50a5a0bce574",
+        "metadataHash": "0xb9af74321daa1fffaab44de5440294a99906c74a1ba9841aed9d8a88a6b316b3",
+        "parentId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "salt": "0x2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "issuedAt": 1700000000,
+        "expiresAt": 0
+      },
+      "metadata": {
+        "title": "跨语言测试 · Research",
+        "mediaType": "text/plain;charset=utf-8",
+        "model": "test-only",
+        "application": "Fixture Studio"
+      },
+      "signature": "0x1303945b5fda2a86fe69f1f7557175d3cfc11e7f0983c9ea07b73d538e16be77195a4629d3ee521d2b4a7fabddccc33c0d70230f09fa0fb23ddc3f7c0e42d4c41b",
+      "receiptId": "0x453f592c43f9be0d3fdc3b28a11f390a2e0ce1febbcf83f8e9e9c01778b95c7f",
+      "batchId": "0x5033af7121543e7705f1252ac31d40d3c18e37ccd73a0ab8c87926243f96090b",
+      "root": "0xe6086e6aa2e091cf0823a119a911c080f4655d8f32d5e886e332b217a7942ff5",
+      "proof": [
+        "0x90a4f9927bba891773bd025bfca65d14a97962e353143b0d44b463eadbe07091"
+      ],
+      "batchCount": 2
+    }
+  ]
+}

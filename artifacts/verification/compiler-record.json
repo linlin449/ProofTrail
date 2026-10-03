@@ -1,0 +1,9 @@
+{
+  "contract": "ProofTrailRegistry.sol:ProofTrailRegistry",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "sourceSha256": "a728957d9edce03f89cd1f0c8df6e1b8ee7577839eb8d45c26296f9698734307",
+  "optimizerRuns": 200,
+  "evmVersion": "paris",
+  "deploymentVerified": false,
+  "note": "Compiler inputs only. Actual deployment and explorer source verification are separate gates."
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ProofTrail · 签发、携带与独立验证 AI 内容来源凭证">
+  <title>ProofTrail · 内容的出处，随内容同行</title>
+  <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js?v=3" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><img src="/static/logo.svg" alt="" width="32" height="32"><span>ProofTrail<small>来源凭证工作台</small></span></a>
+    <div class="network"><span id="network-dot" class="network-dot"></span><span id="network-name">正在连接</span><span class="version">协议 v1</span></div>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">FOR BUILDERS, FOR EVERY COPY</p><h1>内容的出处，<br>随内容同行。</h1><p class="lede">一份签名凭证，跨应用携带。<br>检查发行者、内容完整性与链上撤销状态。</p></div>
+      <div class="intro-proof"><div class="fold"></div><p class="paper-caption">PORTABLE PROVENANCE</p><div class="paper-path"><span>AI 应用</span><b>→</b><span>签名凭证</span><b>→</b><span>独立验证</span></div><p>原文留在链下。凭证可下载。验证不依赖发行平台。</p><div class="mini-chain"><span>签名</span><i></i><span>Merkle 证明</span><i></i><span>链上登记</span></div></div>
+    </section>
+    <div id="mode-note" class="mode-note">正在读取可信网络与合约配置…</div>
+    <nav class="tabs" aria-label="工作台"><button class="tab active" data-tab="issue" aria-selected="true">签发凭证</button><button class="tab" data-tab="verify" aria-selected="false">独立验证</button><button class="tab" data-tab="integrate" aria-selected="false">开发者接入</button></nav>
+    <section id="panel-issue" class="panel workspace">
+      <form id="issue-form" class="editor">
+        <div class="section-heading"><span class="section-marker">签发</span><h2>让这份内容带着出处</h2></div>
+        <label for="title">内容标题</label><input id="title" name="title" maxlength="160" required value="关于 AI 内容验证的研究笔记">
+        <div class="field-pair"><div><label for="application">发行应用</label><input id="application" maxlength="160" required value="Research Studio"></div><div><label for="model">模型声明</label><input id="model" maxlength="160" required value="示例模型 · 发行者声明"></div></div>
+        <label for="content">内容原文 <span class="label-note">按原始 UTF-8 字节验证</span></label><textarea id="content" rows="7" maxlength="50000" required></textarea>
+        <div class="editor-tools"><button type="button" id="load-example" class="text-button">载入研究笔记示例</button><span id="content-length">0 字符</span></div>
+        <details class="advanced"><summary>批量登记与版本设置</summary><label for="batch-size">本次批量份数</label><select id="batch-size"><option value="1">1 份 · 当前原文</option><option value="4">4 份 · 原文 + 3 份自动生成的测试副本</option><option value="16">16 份 · 批量成本演示</option></select><p class="help">测试副本会在原文后添加编号，真实计算各自凭证与证明。</p><label for="parent-id">上一版本凭证 ID（可选）</label><input id="parent-id" placeholder="0x…64 位哈希"><label for="expiry">有效期</label><select id="expiry"><option value="0">不设期限</option><option value="3600">1 小时</option><option value="86400">24 小时</option></select></details>
+        <button type="submit" id="issue-button" class="primary">签发并登记凭证 <span>↗</span></button>
+        <p class="help" id="signing-note">演示使用本地 EVM 测试账户，不需要真实资产。</p>
+      </form>
+      <aside class="receipt" aria-label="签发结果"><div class="receipt-top"><span>PROOFTRAIL / RECEIPT</span><span id="receipt-state">待签发</span></div><div id="receipt-empty" class="empty"><div class="empty-mark">P<span>↗</span></div><h3>出处，从这里开始</h3><p>登记后，你会得到可下载的凭证、<br>交易记录与独立验证入口。</p></div><div id="receipt-result" hidden><h3 id="receipt-title"></h3><p class="receipt-issuer">发行者 <code id="receipt-issuer"></code></p><div class="receipt-rows"><div><span>凭证 ID</span><code id="receipt-id"></code></div><div><span>Merkle 根</span><code id="receipt-root"></code></div><div><span>本批包含</span><b id="receipt-count"></b></div><div><span>交易 Gas</span><b id="receipt-gas"></b></div><div><span>每份摊销 Gas</span><b id="receipt-amortized"></b></div><div><span>执行 + 确认耗时</span><b id="receipt-latency"></b></div></div><p id="receipt-network-note" class="help"></p><div class="receipt-actions"><button id="download-bundle" class="secondary">下载凭证 JSON ↓</button><button id="go-verify" class="primary">验证这份内容 →</button></div></div><div class="receipt-foot">发行者声明 · 签名可验 · 内容可携带</div></aside>
+    </section>
+    <section id="panel-verify" class="panel workspace" hidden>
+      <form id="verify-form" class="editor"><div class="section-heading"><span class="section-marker">验证</span><h2>逐项检查，不靠平台背书</h2></div><label for="verify-content">待验证内容</label><textarea id="verify-content" rows="6" maxlength="50000"></textarea><div class="editor-tools"><button type="button" id="tamper" class="text-button">模拟一次内容篡改</button><button type="button" id="restore" class="text-button">恢复已签发原文</button></div><label for="bundle-input">凭证 JSON</label><textarea id="bundle-input" class="code-input" rows="8" spellcheck="false" placeholder="粘贴或导入下载的 JSON 凭证"></textarea><label class="file-button" for="bundle-file">导入凭证文件 ↓</label><input id="bundle-file" type="file" accept="application/json,.json" hidden><button type="submit" id="verify-button" class="primary">独立验证 →</button><button type="button" id="revoke-button" class="danger" disabled>撤销当前凭证</button><p class="help">撤销由发行者授权，登记历史仍在；已下载的凭证也会读到新状态。</p></form>
+      <aside class="trace"><div class="trace-heading"><p class="eyebrow">VERIFICATION TRACE</p><h3 id="verify-status" aria-live="polite">等待一份凭证</h3><p id="verify-summary">签名与内容在本地服务重算，生命周期直接读取可信合约。</p></div><ol id="checks" class="checks"><li class="pending-check"><span class="check-node">·</span><div><strong>证据链将在这里展开</strong><p>载入原文与凭证，开始检查。</p></div></li></ol><div id="anchor-time" class="anchor-time"></div></aside>
+    </section>
+    <section id="panel-integrate" class="panel integrate" hidden><div><p class="eyebrow">ONE RECEIPT, MANY APPLICATIONS</p><h2>你的应用签发。<br>另一应用独立验证。</h2><p>把 JSON 包和原始文件交给消费者。消费者固定可信合约，直接读链，避免把验证权交还给内容平台。</p><a href="/docs" class="secondary link-button">查看 OpenAPI 接口 ↗</a></div><div class="code-card"><span>Python / 独立消费者</span><pre><code>from prooftrail import ReceiptBundle, verify_receipt
+from prooftrail.chain import Registry
+
+# 可信合约由你的应用配置，不从凭证推断
+registry = Registry.monad(RPC_URL, TRUSTED_CONTRACT)
+bundle = ReceiptBundle.model_validate_json(receipt_json)
+result = verify_receipt(original_bytes, bundle, registry)
+
+assert result.status == "valid"</code></pre><p>演示凭证属于本次本地链。切换网络后，可信域检查会拒绝旧凭证。</p></div></section>
+    <section class="session"><div class="session-header"><h2>本次会话的凭证</h2><span>仅显示实际签发记录</span></div><div id="recent" class="recent-empty">还没有签发记录。先登记一份内容。</div></section>
+    <footer><span>ProofTrail · 开放协议 / 独立验证</span><p>来源证明 ≠ 事实证明。模型与应用名称是发行者声明。</p><code id="contract-info">可信合约：连接中</code></footer>
+  </main><div id="notification" class="notification" role="status" hidden></div>
+  <dialog id="revoke-dialog"><form method="dialog"><h2>撤销这份来源凭证？</h2><p>撤销后，所有持有者都会读到撤销状态。登记历史仍保留。这是当前发行者授权的链上操作。</p><div class="dialog-actions"><button value="cancel" class="secondary">返回检查</button><button value="confirm" class="danger">确认撤销</button></div></form></dialog>
+</body></html>

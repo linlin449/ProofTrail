@@ -1,0 +1,13 @@
+{
+  "platform": "linux",
+  "uid": 10001,
+  "installedPackage": "/app/.venv/lib/python3.12/site-packages/prooftrail/__init__.py",
+  "localEvmOnly": true,
+  "issue": "passed",
+  "independentConsumer": "passed",
+  "tampering": "rejected",
+  "revocation": "rejected",
+  "privateKeyConfigured": false,
+  "transaction": "0x97b25c83168bac831eb3905c332adcc9a041b9fd8cfeb716f83ddc60702cb36e",
+  "note": "Linux installation and local EVM checks only; not Monad deployment or hosting evidence"
+}

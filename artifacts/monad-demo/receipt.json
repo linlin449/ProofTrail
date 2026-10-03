@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "prooftrail/1",
+  "domain": {
+    "name": "ProofTrail",
+    "version": "1",
+    "chainId": 10143,
+    "verifyingContract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+  },
+  "claim": {
+    "issuer": "0xFDef1C2f141Ab9B55E8fDefB27bD6F43aF4987e0",
+    "contentHash": "0xc9f33bf83919f55f34202f6c2a0ad19df473fb54415222a4ea695d29d3ed3b01",
+    "metadataHash": "0xe55da0e9125156f0fe27122bf04f851d3d10e810e1bd103a8f6d36ec191388da",
+    "parentId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "salt": "0xfb73d6462d6a596981b9074c1cae2ca57f6ae14ce697a7f7610057e9f88ab231",
+    "issuedAt": 1790994590,
+    "expiresAt": 0
+  },
+  "metadata": {
+    "title": "Monad 实测 · 1 份 · 第 1 份",
+    "mediaType": "text/plain;charset=utf-8",
+    "model": "unspecified",
+    "application": "Research Studio · synthetic test"
+  },
+  "signature": "0x6c5780aadceaa50a963353c9ed95dccd4f9a726f3772621f69650459981fbd68048d92704a4a669ab9693141f233f545080c7039a9a43ac1c21330c7e8052ec21b",
+  "receiptId": "0xa8ce1a3da050280284663d545d42583d487bd74677a23d492f6038d60235a44f",
+  "batchId": "0x7881b9e1be530f4e1590d6a83d8b77d431af765be34d9e6005cccecd5e24f7fd",
+  "root": "0xfb05fd6e5027a27231252ba88dc17c6cec87cbadd49bc20acb7273734252b5eb",
+  "proof": [],
+  "batchCount": 1
+}

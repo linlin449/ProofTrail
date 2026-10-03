@@ -1,0 +1,53 @@
+{
+  "environment": "local PyEVM; not Monad performance evidence",
+  "compiler": "solc 0.8.28 optimizer 200 paris",
+  "chainId": 131277322940537,
+  "contract": "0xF2E246BB76DF876Cef8b38ae84130F4F55De395b",
+  "measurements": [
+    {
+      "size": 1,
+      "transactionHash": "0xfa26c801e4d1c4c0ba2b91bfe926c9906ef9721d786cdea273d934a9d0508249",
+      "blockNumber": 2,
+      "gasUsed": 91365,
+      "gasPriceWei": 1000000000,
+      "blockTimestamp": 1790953967,
+      "network": "local",
+      "gasPerReceipt": 91365.0
+    },
+    {
+      "size": 4,
+      "transactionHash": "0x830fbdb8cbf360bad029027d6745698765573e4a0c50f5a21fdfa3161b81b8d4",
+      "blockNumber": 3,
+      "gasUsed": 91365,
+      "gasPriceWei": 1000000000,
+      "blockTimestamp": 1790953968,
+      "network": "local",
+      "gasPerReceipt": 22841.25
+    },
+    {
+      "size": 16,
+      "transactionHash": "0xf7854ea3ff8451a1d0fe81ddd2d62ab392674dc8a7bf23d313206923e338e478",
+      "blockNumber": 4,
+      "gasUsed": 91365,
+      "gasPriceWei": 1000000000,
+      "blockTimestamp": 1790953969,
+      "network": "local",
+      "gasPerReceipt": 5710.3125
+    },
+    {
+      "size": 32,
+      "transactionHash": "0xe127e0ce4dd5741e10e864785f21332d1a30244dc2e148a118b2d9be22447642",
+      "blockNumber": 5,
+      "gasUsed": 91365,
+      "gasPriceWei": 1000000000,
+      "blockTimestamp": 1790953970,
+      "network": "local",
+      "gasPerReceipt": 2855.15625
+    }
+  ],
+  "limitations": [
+    "签名数量随批次线性增加；根登记 Gas 不包含签名与离线构树成本",
+    "本地 EVM Gas 与真实 Monad 的 Gas 计费可能不同，必须另外实测",
+    "批内叶子数量为发行者承诺，Merkle 根本身不证明计数语义"
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "contractName": "ProofTrailRegistry",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "sourceSha256": "a728957d9edce03f89cd1f0c8df6e1b8ee7577839eb8d45c26296f9698734307",
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode.object",
+          "evm.deployedBytecode.object"
+        ]
+      }
+    }
+  },
+  "abi": [
+    {
+      "inputs": [],
+      "name": "AlreadyRevoked",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DuplicateBatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidBatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidReceipt",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "batchId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint32",
+          "name": "count",
+          "type": "uint32"
+        }
+      ],
+      "name": "BatchAnchored",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "receiptId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ReceiptRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_BATCH_SIZE",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint32",
+          "name": "count",
+          "type": "uint32"
+        }
+      ],
+      "name": "anchorBatch",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "batchId",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        }
+      ],
+      "name": "batchIdFor",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "batches",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint32",
+          "name": "count",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "anchoredAt",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "receiptId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "revoke",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "revoked",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b506104ba8061001f6000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c80631f2cbb941461006757806397077da91461008d578063b75c7dc6146100a0578063c81e25ab146100b5578063cfdbf25414610147578063e46e384614610165575b600080fd5b61007a6100753660046103fa565b6101a3565b6040519081526020015b60405180910390f35b61007a61009b366004610432565b6101e0565b6100b36100ae36600461046b565b61034f565b005b6101086100c336600461046b565b6000602081905290815260409020805460018201546002909201546001600160a01b03909116919063ffffffff811690640100000000900467ffffffffffffffff1684565b604080516001600160a01b039095168552602085019390935263ffffffff9091169183019190915267ffffffffffffffff166060820152608001610084565b61015061100081565b60405163ffffffff9091168152602001610084565b6101936101733660046103fa565b600160209081526000928352604080842090915290825290205460ff1681565b6040519015158152602001610084565b604080516001600160a01b038416602082015290810182905260009060600160405160208183030381529060405280519060200120905092915050565b60008215806101f3575063ffffffff8216155b80610205575061100063ffffffff8316115b15610223576040516333b094a160e01b815260040160405180910390fd5b61022d33846101a3565b6000818152602081905260409020549091506001600160a01b03161561026657604051631ac678e160e31b815260040160405180910390fd5b6040805160808101825233808252602080830187815263ffffffff80881685870190815267ffffffffffffffff4281166060880190815260008a81529586905294889020965187546001600160a01b03919091166001600160a01b03199091161787559251600187015551600290950180549351909216640100000000026bffffffffffffffffffffffff1990931694169390931717909155905182907f5f167fa89312777dfa84e16746d5bd544d49ed288a6dbc2f3217ed0783b2a7f790610341908790879091825263ffffffff16602082015260400190565b60405180910390a392915050565b8061036d5760405163300262ab60e21b815260040160405180910390fd5b33600090815260016020908152604080832084845290915290205460ff16156103a95760405163905e710760e01b815260040160405180910390fd5b336000818152600160208181526040808420868552909152808320805460ff1916909217909155518392917f8aaa5865304adeff65b0898d688dd7a2a8c65d281d6fabed2d41646089b1a30f91a350565b6000806040838503121561040d57600080fd5b82356001600160a01b038116811461042457600080fd5b946020939093013593505050565b6000806040838503121561044557600080fd5b82359150602083013563ffffffff8116811461046057600080fd5b809150509250929050565b60006020828403121561047d57600080fd5b503591905056fea26469706673582212201083058463c00ec56b66ef8ad6b46ecddebe7bd7f5b0bdc285412aee87faf30864736f6c634300081c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c80631f2cbb941461006757806397077da91461008d578063b75c7dc6146100a0578063c81e25ab146100b5578063cfdbf25414610147578063e46e384614610165575b600080fd5b61007a6100753660046103fa565b6101a3565b6040519081526020015b60405180910390f35b61007a61009b366004610432565b6101e0565b6100b36100ae36600461046b565b61034f565b005b6101086100c336600461046b565b6000602081905290815260409020805460018201546002909201546001600160a01b03909116919063ffffffff811690640100000000900467ffffffffffffffff1684565b604080516001600160a01b039095168552602085019390935263ffffffff9091169183019190915267ffffffffffffffff166060820152608001610084565b61015061100081565b60405163ffffffff9091168152602001610084565b6101936101733660046103fa565b600160209081526000928352604080842090915290825290205460ff1681565b6040519015158152602001610084565b604080516001600160a01b038416602082015290810182905260009060600160405160208183030381529060405280519060200120905092915050565b60008215806101f3575063ffffffff8216155b80610205575061100063ffffffff8316115b15610223576040516333b094a160e01b815260040160405180910390fd5b61022d33846101a3565b6000818152602081905260409020549091506001600160a01b03161561026657604051631ac678e160e31b815260040160405180910390fd5b6040805160808101825233808252602080830187815263ffffffff80881685870190815267ffffffffffffffff4281166060880190815260008a81529586905294889020965187546001600160a01b03919091166001600160a01b03199091161787559251600187015551600290950180549351909216640100000000026bffffffffffffffffffffffff1990931694169390931717909155905182907f5f167fa89312777dfa84e16746d5bd544d49ed288a6dbc2f3217ed0783b2a7f790610341908790879091825263ffffffff16602082015260400190565b60405180910390a392915050565b8061036d5760405163300262ab60e21b815260040160405180910390fd5b33600090815260016020908152604080832084845290915290205460ff16156103a95760405163905e710760e01b815260040160405180910390fd5b336000818152600160208181526040808420868552909152808320805460ff1916909217909155518392917f8aaa5865304adeff65b0898d688dd7a2a8c65d281d6fabed2d41646089b1a30f91a350565b6000806040838503121561040d57600080fd5b82356001600160a01b038116811461042457600080fd5b946020939093013593505050565b6000806040838503121561044557600080fd5b82359150602083013563ffffffff8116811461046057600080fd5b809150509250929050565b60006020828403121561047d57600080fd5b503591905056fea26469706673582212201083058463c00ec56b66ef8ad6b46ecddebe7bd7f5b0bdc285412aee87faf30864736f6c634300081c0033"
+}

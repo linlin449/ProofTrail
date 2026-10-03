@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prooftrail"
+version = "0.1.0"
+description = "Portable AI provenance receipts with independently verifiable Monad anchors"
+readme = "README.zh-CN.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "web3[tester]>=7.15,<8", "eth-account>=0.13.7,<0.14", "pydantic>=2.11,<3", "httpx>=0.28,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+prooftrail = "prooftrail.cli:main"
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[dependency-groups]
+dev = [
+    "pillow>=12,<13",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prooftrail"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]

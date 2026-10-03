@@ -1,0 +1,13 @@
+{
+  "network": "Monad Testnet",
+  "chainId": 10143,
+  "address": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+  "deployer": "0xFDef1C2f141Ab9B55E8fDefB27bD6F43aF4987e0",
+  "transactionHash": "0x9e0e482c6b05f6d50db436e524eb0df3475b01340e496692ef845400eda8f45d",
+  "blockNumber": 67709389,
+  "gasUsed": 318157,
+  "sourceSha256": "a728957d9edce03f89cd1f0c8df6e1b8ee7577839eb8d45c26296f9698734307",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "runtimeMatches": true,
+  "checkedAtUtc": "2026-10-03T02:25:00.027503+00:00"
+}

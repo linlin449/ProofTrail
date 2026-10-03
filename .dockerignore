@@ -1,0 +1,10 @@
+# Explicit build-context allowlist. No keys, environment files, screenshots or Git metadata.
+**
+!pyproject.toml
+!uv.lock
+!README.zh-CN.md
+!LICENSE
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc

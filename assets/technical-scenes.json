@@ -1,0 +1,38 @@
+[
+  {
+    "title": "01 / 实际部署与源码",
+    "visual": "deployment",
+    "narration": "这是 ProofTrail 的真实测试网技术演示审阅版，使用实际页面截图、交易记录和通用合成旁白，不是连续钱包录屏。合约已经部署到 Monad 测试网，链编号一零一四三。部署交易成功，本机运行字节码与编译结果一致，Sourcify 的创建和运行字节码均为精确匹配。",
+    "english": "Technical review: actual UI screenshots and transaction records, with synthetic narration; not continuous wallet footage. The registry is deployed on Monad testnet, chain 10143, with exact-match creation and runtime verification."
+  },
+  {
+    "title": "02 / 签名、批量登记与导出",
+    "visual": "batches",
+    "narration": "Python 签名器对原文字节和固定元数据做 EIP 七一二签名，再把凭证组成 Merkle 树。实际完成一、四、十六和三十二条四组登记，每组一笔交易。此次每批八万八千二百六十一 Gas，三十二条均摊约两千七百五十八。原文和 JSON 凭证导出到文件，只有根登记上链。",
+    "english": "Python signs the content hash and constrained metadata with EIP-712. Actual batches of 1, 4, 16 and 32 used one registration each: 88,261 gas per batch in this run. Content and portable JSON are exported off-chain."
+  },
+  {
+    "title": "03 / 应用 B 独立消费",
+    "visual": "valid",
+    "narration": "把导出的原文和凭证交给另一款应用 Knowledge Publisher。页面读取真实 Monad，不查询发行者的 API 或数据库。固定可信链和合约，再检查内容、元数据、签名、证明、有效期、登记与当前撤销。全部通过后只生成私有预览，并没有公开发布内容。",
+    "english": "A separate Knowledge Publisher reads the public chain using its own trusted registry, without the issuer's API or database. Intact content passes all checks and generates a private preview; nothing is publicly published."
+  },
+  {
+    "title": "04 / 原文改变，拒绝预览",
+    "visual": "tampered",
+    "narration": "在同一凭证对应的原文后添加改动，再运行检查。签名和链上登记仍然存在，但内容完整性变成失败，私有预览消失。修改输入时界面立即清除旧结果，迟到的响应也不能把旧的通过状态覆盖回来。",
+    "english": "Changing the original bytes causes content integrity to fail, even though the signature and anchor still exist. Preview is refused. Input changes clear old results, and stale asynchronous responses are ignored."
+  },
+  {
+    "title": "05 / 读取发行者最新撤销",
+    "visual": "revoked",
+    "narration": "另一测试账户撤销同一编号，只改变自己的命名空间，原发行者的凭证仍有效。随后由原发行者真实发送撤销交易。独立消费端使用已下载的原文和凭证重新查询，内容完整性仍通过，但撤销检查失败，因此拒绝预览。下载副本没有冻结旧状态。",
+    "english": "A second account's revocation only affects its own namespace. After the original issuer's actual revoke transaction, downloaded content still passes integrity, but live revocation fails and preview is refused."
+  },
+  {
+    "title": "06 / 独立复现与交付边界",
+    "visual": "reproduce",
+    "narration": "脱离两个服务，独立命令行进程也验证第一份有效、撤销份无效。两个非管理员只读容器连接真实测试网，没有签名私钥，服务端写接口被拒绝。中文文档保存原始交易和复现命令。公开托管、GitHub 与浏览器钱包实测仍待完成；尚无外部采用，来源声明不证明事实、版权或身份，比赛尚未提交。",
+    "english": "An independent CLI and two read-only, non-root containers reproduce the live-chain checks without signing keys. Hosting, public GitHub and browser-wallet testing remain pending. No external adoption is claimed. Provenance is not truth, copyright or identity; not submitted."
+  }
+]

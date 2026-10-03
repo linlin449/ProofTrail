@@ -1,0 +1,28 @@
+services:
+  issuer:
+    build: .
+    image: prooftrail:review
+    ports:
+      - "127.0.0.1:${PROOFTRAIL_ISSUER_PORT:-8765}:8765"
+    environment:
+      PROOFTRAIL_RPC_URL: ${PROOFTRAIL_RPC_URL:-https://testnet-rpc.monad.xyz}
+      PROOFTRAIL_CONTRACT: ${PROOFTRAIL_CONTRACT:?Set a verified Monad contract address}
+      PROOFTRAIL_ALLOWED_HOSTS: ${PROOFTRAIL_ALLOWED_HOSTS:-127.0.0.1,localhost}
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  consumer:
+    build: .
+    image: prooftrail:review
+    command: ["consumer", "--host", "0.0.0.0", "--port", "8765", "--contract", "${PROOFTRAIL_CONTRACT:?Set a verified Monad contract address}", "--rpc", "${PROOFTRAIL_RPC_URL:-https://testnet-rpc.monad.xyz}"]
+    ports:
+      - "127.0.0.1:${PROOFTRAIL_CONSUMER_PORT:-8776}:8765"
+    environment:
+      PROOFTRAIL_ALLOWED_HOSTS: ${PROOFTRAIL_ALLOWED_HOSTS:-127.0.0.1,localhost}
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL

@@ -1,0 +1,24 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "ProofTrailRegistry.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.28;\n\n/// @title ProofTrailRegistry — issuer-owned batch commitments and receipt revocations\n/// @notice No administrator, upgrade path, content custody, token, or payment function.\n/// @dev Root inclusion and EIP-712 issuer signatures are verified by independent clients.\ncontract ProofTrailRegistry {\n    struct Batch {\n        address issuer;\n        bytes32 root;\n        uint32 count;\n        uint64 anchoredAt;\n    }\n\n    mapping(bytes32 => Batch) public batches;\n    mapping(address => mapping(bytes32 => bool)) public revoked;\n    uint32 public constant MAX_BATCH_SIZE = 4096;\n\n    event BatchAnchored(bytes32 indexed batchId, address indexed issuer, bytes32 root, uint32 count);\n    event ReceiptRevoked(address indexed issuer, bytes32 indexed receiptId);\n\n    error InvalidBatch();\n    error DuplicateBatch();\n    error InvalidReceipt();\n    error AlreadyRevoked();\n\n    function batchIdFor(address issuer, bytes32 root) public pure returns (bytes32) {\n        return keccak256(abi.encode(issuer, root));\n    }\n\n    function anchorBatch(bytes32 root, uint32 count) external returns (bytes32 batchId) {\n        if (root == bytes32(0) || count == 0 || count > MAX_BATCH_SIZE) revert InvalidBatch();\n        batchId = batchIdFor(msg.sender, root);\n        if (batches[batchId].issuer != address(0)) revert DuplicateBatch();\n        batches[batchId] = Batch(msg.sender, root, count, uint64(block.timestamp));\n        emit BatchAnchored(batchId, msg.sender, root, count);\n    }\n\n    function revoke(bytes32 receiptId) external {\n        if (receiptId == bytes32(0)) revert InvalidReceipt();\n        if (revoked[msg.sender][receiptId]) revert AlreadyRevoked();\n        revoked[msg.sender][receiptId] = true;\n        emit ReceiptRevoked(msg.sender, receiptId);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode.object",
+          "evm.deployedBytecode.object"
+        ]
+      }
+    }
+  }
+}
