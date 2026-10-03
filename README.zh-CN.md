@@ -4,7 +4,9 @@ ProofTrail 面向 AI 应用开发者与内容平台，提供 Python SDK、独立
 
 **项目状态：开发中。比赛草稿已建立，未正式提交。** 当前真实进度和证据以 [工作计划](docs/工作计划.md) 与 [检查记录](docs/检查记录.md) 为准。获奖不是已验证结果。
 
-**Monad 测试网已经实际部署并验收**：链 10143，合约 `0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7`。[Sourcify 源码精确匹配](https://repo.sourcify.dev/10143/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7)，批量登记、独立消费与发行者撤销通过。查看 [真实交易、测量与检查步骤](docs/Monad实测与检查.md)。本机运行的页面读取真实测试网，但尚未公开托管。
+**Monad 测试网已经实际部署并验收**：链 10143，合约 `0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7`。[Sourcify 源码精确匹配](https://repo.sourcify.dev/10143/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7)，批量登记、独立消费与发行者撤销通过。查看 [真实交易、测量与检查步骤](docs/Monad实测与检查.md)。
+
+**在线使用**：[签发工作台](https://prooftrail-issuer.vercel.app) · [独立知识发布检查](https://prooftrail-consumer.vercel.app)。两个 Python FastAPI 项目部署于 Vercel Hobby，匿名公网验证已通过；有效凭证通过、内容篡改与链上撤销被拒绝。浏览器钱包签名/发送流程仍待用户实测。原始检查记录：`artifacts/public-hosting-probe.json`。
 
 ## 先看这些中文文档
 

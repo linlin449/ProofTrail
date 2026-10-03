@@ -2,7 +2,7 @@
 
 Portable AI-output provenance receipts, issuer-owned Merkle batch anchors and revocations, and an independent Python verifier for Monad.
 
-The hackathon draft is in **Trust, Identity & AI Infrastructure**. Implementation is under review; it has **not been submitted**. The registry is deployed on Monad testnet (chain 10143) at `0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7`, with [exact-match source verification](https://repo.sourcify.dev/10143/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7). Public application hosting is pending; `render.yaml` prepares two independent keyless Docker services. Chinese project documentation starts at [README.zh-CN.md](README.zh-CN.md); real transaction evidence and reproducible checks are in [the testnet walkthrough](docs/Monad实测与检查.md).
+The hackathon draft is in **Trust, Identity & AI Infrastructure**. Implementation is under review; it has **not been submitted**. The registry is deployed on Monad testnet (chain 10143) at `0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7`, with [exact-match source verification](https://repo.sourcify.dev/10143/0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7). The [issuer workbench](https://prooftrail-issuer.vercel.app) and [independent consumer](https://prooftrail-consumer.vercel.app) run Python FastAPI on Vercel Hobby. Anonymous public HTTP checks passed for valid, tampered and revoked receipts; the browser wallet transaction flow remains to be reviewed. Chinese project documentation starts at [README.zh-CN.md](README.zh-CN.md); real transaction evidence and reproducible checks are in [the testnet walkthrough](docs/Monad实测与检查.md).
 
 ## Run locally
 

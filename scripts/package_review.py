@@ -36,6 +36,7 @@ exact = [
     "artifacts/container-build-record.json",
     "artifacts/monad-deployment.json",
     "artifacts/vercel-entrypoint-probe.json",
+    "artifacts/public-hosting-probe.json",
     "artifacts/monad-acceptance.json",
     "artifacts/monad-container-probe.json",
     "artifacts/verification/sourcify-record.json",

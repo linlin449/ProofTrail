@@ -1,0 +1,452 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-03T05:29:51.072643+00:00",
+  "deployedCommit": "edf4f704a41dc1799c42c175ac13b2f7c674b865",
+  "checks": {
+    "issuer": {
+      "url": "https://prooftrail-issuer.vercel.app",
+      "anonymous": true,
+      "checks": {
+        "/": {
+          "httpStatus": 200
+        },
+        "/health": {
+          "httpStatus": 200,
+          "body": {
+            "status": "ok",
+            "mode": "monad"
+          }
+        },
+        "/api/info": {
+          "httpStatus": 200,
+          "body": {
+            "mode": "monad",
+            "chainId": 10143,
+            "contract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+            "domain": {
+              "name": "ProofTrail",
+              "version": "1",
+              "chainId": 10143,
+              "verifyingContract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            "localWrites": false,
+            "issuer": null,
+            "protocol": "prooftrail/1",
+            "maxBatchSize": 64,
+            "disclaimer": "凭证证明发行者声明与字节完整性，不证明事实、版权或实际模型执行"
+          }
+        },
+        "/static/app.js": {
+          "httpStatus": 200
+        },
+        "/static/style.css": {
+          "httpStatus": 200
+        },
+        "serverSigningDisabled": {
+          "httpStatus": 403
+        }
+      },
+      "cases": {
+        "valid": {
+          "httpStatus": 200,
+          "status": "valid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": true,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "0 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994591"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": true,
+              "detail": "可信合约当前未记录撤销"
+            }
+          ],
+          "originalContentSha256": "c9f33bf83919f55f34202f6c2a0ad19df473fb54415222a4ea695d29d3ed3b01"
+        },
+        "tampered": {
+          "httpStatus": 200,
+          "status": "invalid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": false,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "0 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994591"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": true,
+              "detail": "可信合约当前未记录撤销"
+            }
+          ],
+          "originalContentSha256": "c9f33bf83919f55f34202f6c2a0ad19df473fb54415222a4ea695d29d3ed3b01"
+        },
+        "revoked": {
+          "httpStatus": 200,
+          "status": "invalid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": true,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "5 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994602"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": false,
+              "detail": "发行者已撤销该凭证"
+            }
+          ],
+          "originalContentSha256": "b0f0e3d6b695531990a8dfcb2912ef0c1d291ba3eb06ed15fc3e1c5ec989d074"
+        }
+      }
+    },
+    "consumer": {
+      "url": "https://prooftrail-consumer.vercel.app",
+      "anonymous": true,
+      "checks": {
+        "/": {
+          "httpStatus": 200
+        },
+        "/health": {
+          "httpStatus": 200,
+          "body": {
+            "status": "ok",
+            "chainId": 10143
+          }
+        },
+        "/api/info": {
+          "httpStatus": 200,
+          "body": {
+            "mode": "monad",
+            "chainId": 10143,
+            "contract": "0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7",
+            "issuerApiRequired": false
+          }
+        },
+        "/static/app.js": {
+          "httpStatus": 200
+        },
+        "/static/style.css": {
+          "httpStatus": 200
+        }
+      },
+      "cases": {
+        "valid": {
+          "httpStatus": 200,
+          "status": "valid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": true,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "0 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994591"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": true,
+              "detail": "可信合约当前未记录撤销"
+            }
+          ],
+          "originalContentSha256": "c9f33bf83919f55f34202f6c2a0ad19df473fb54415222a4ea695d29d3ed3b01"
+        },
+        "tampered": {
+          "httpStatus": 200,
+          "status": "invalid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": false,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "0 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994591"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": true,
+              "detail": "可信合约当前未记录撤销"
+            }
+          ],
+          "originalContentSha256": "c9f33bf83919f55f34202f6c2a0ad19df473fb54415222a4ea695d29d3ed3b01"
+        },
+        "revoked": {
+          "httpStatus": 200,
+          "status": "invalid",
+          "checks": [
+            {
+              "key": "schema",
+              "label": "凭证格式",
+              "passed": true,
+              "detail": "prooftrail/1 · 严格字段与格式检查"
+            },
+            {
+              "key": "domain",
+              "label": "可信网络与合约",
+              "passed": true,
+              "detail": "期望链 10143 / 0xd4c01FEdb19eF081AAF3c6814316d8CeF7579Cd7"
+            },
+            {
+              "key": "content",
+              "label": "内容完整性",
+              "passed": true,
+              "detail": "原始字节 SHA-256；包含空格、换行与 Unicode 差异"
+            },
+            {
+              "key": "metadata",
+              "label": "元数据完整性",
+              "passed": true,
+              "detail": "标题、应用、媒体类型与模型声明均纳入签名"
+            },
+            {
+              "key": "signature",
+              "label": "发行者签名",
+              "passed": true,
+              "detail": "EIP-712 / secp256k1 · 发行者地址与签名恢复地址比较"
+            },
+            {
+              "key": "merkle",
+              "label": "批量包含证明",
+              "passed": true,
+              "detail": "5 层证明 · 独立重算 Merkle 根"
+            },
+            {
+              "key": "expiry",
+              "label": "凭证有效期",
+              "passed": true,
+              "detail": "校验签发时间非未来且未过期；签发时间是发行者声明"
+            },
+            {
+              "key": "anchor",
+              "label": "链上登记",
+              "passed": true,
+              "detail": "已查可信合约 · 登记区块时间 1790994602"
+            },
+            {
+              "key": "revocation",
+              "label": "撤销状态",
+              "passed": false,
+              "detail": "发行者已撤销该凭证"
+            }
+          ],
+          "originalContentSha256": "b0f0e3d6b695531990a8dfcb2912ef0c1d291ba3eb06ed15fc3e1c5ec989d074"
+        }
+      }
+    }
+  }
+}
