@@ -43,8 +43,8 @@
     "title": "公开可用的原型，\n可复现的证据。",
     "tag": "REVIEW DRAFT / NOT SUBMITTED",
     "body": "两个 Python 应用已上线\n公开代码、中文文档与链上证据",
-    "narration": "项目已有两个在线 Python 应用、公开代码与中文文档，七十七项测试通过，合约源码精确匹配。任何人无需钱包即可检查链上样例。钱包流程与最终视频仍待用户审阅。来源声明不证明事实、版权或身份。这是合成旁白审阅草稿，尚未提交。",
-    "english": "Two Python apps, public source and Chinese docs are online, with 77 tests and exact-match contract verification. Try a live-chain sample without a wallet. Wallet review is pending. Provenance is not truth, copyright or identity. Synthetic narration; not submitted.",
+    "narration": "项目已有两个在线 Python 应用、公开代码与中文文档，七十七项测试通过，合约源码精确匹配。任何人无需钱包即可检查链上样例。用户钱包签发与跨应用检查已通过，最终视频待审阅。来源声明不证明事实、版权或身份。这是合成旁白审阅草稿，尚未提交。",
+    "english": "Two Python apps and public source are online, with 77 tests and exact-match contract verification. Live-chain samples need no wallet. User wallet issuance and cross-app checks passed; final video review is pending. Provenance is not truth, copyright or identity. Synthetic narration; not submitted.",
     "visual": "next"
   }
 ]

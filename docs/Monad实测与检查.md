@@ -64,4 +64,4 @@ uv run python -m prooftrail verify artifacts/monad-demo/revoked-content.txt arti
 
 ## 仍待验收
 
-浏览器钱包注入、账户授权、EIP-712 钱包签名和发送交易的实际用户流程尚未完成。Python 专用测试账户签名证明链上协议可运行，不能替代浏览器钱包实测。公开 GitHub 与 Vercel 双服务已完成；匿名公网验证记录在 `artifacts/public-hosting-probe.json`。最终技术视频确认与用户检查仍待完成。
+2026-10-03 用户在外置浏览器完成账户授权、EIP-712 钱包签名与实际登记交易，下载凭证经独立 SDK 和公网消费端九项检查通过，修改原文后拒绝预览、恢复后重新通过。登记 status=1、区块 67784181、Gas 88,261；本机原始证据见 `artifacts/review/user-wallet-registration.json`、`user-wallet-verification.json` 和 `user-wallet-browser-check.json`。这些用户证据不进入公开源码。公开 GitHub 与 Vercel 双服务已完成；匿名公网验证记录在 `artifacts/public-hosting-probe.json`。最终真实操作录像与用户审阅仍待完成。
